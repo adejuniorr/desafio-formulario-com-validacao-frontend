@@ -1,8 +1,10 @@
+import { Form } from "./components/Form";
+
 function App() {
   return (
     <>
-      <main className="h-screen w-screen flex items-center justify-center bg-gray-900 text-gray-100">
-        <h1>Hello World</h1>
+      <main className="h-screen w-screen flex items-center justify-center bg-gray-400 text-gray-100">
+        <Form />
       </main>
     </>
   );
