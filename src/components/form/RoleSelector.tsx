@@ -53,6 +53,7 @@ export const RoleSelector = () => {
         className="relative flex items-center p-3 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-fusion-cyan focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-fusiontext-fusion-cyan"
       >
         <input
+        required
           id="role-input"
           type="text"
           title="Selecione um cargo"
