@@ -57,7 +57,7 @@ export const RoleSelector = () => {
           <FaArrowDown className="cursor-pointer hover:text-fusion-cyan" />
         </span>
         {isOpen && (
-          <div className="absolute top-[50px] left-0 rounded-md w-full h-fit max-h-[120px] overflow-hidden flex flex-col gap-3 bg-gray-900">
+          <div className="absolute top-[50px] left-0 rounded-md w-full h-fit max-h-[120px] overflow-y-scroll flex flex-col gap-3 bg-gray-900">
             {filteredRoles.map((role, index) => (
               <span
                 key={index}
