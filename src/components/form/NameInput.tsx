@@ -3,6 +3,7 @@ interface NameInputProps {}
 export const NameInput = ({}: NameInputProps) => {
   return (
     <input
+      required
       type="text"
       title="Digite seu nome"
       placeholder="Nome completo"

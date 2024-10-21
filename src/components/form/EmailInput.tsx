@@ -3,6 +3,7 @@ interface EmailInputProps {}
 export const EmailInput = ({}: EmailInputProps) => {
   return (
     <input
+      required
       type="email"
       title="Digite seu e-mail"
       placeholder="E-mail"
