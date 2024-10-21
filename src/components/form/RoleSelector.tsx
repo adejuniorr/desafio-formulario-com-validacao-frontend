@@ -52,9 +52,16 @@ export const RoleSelector = () => {
 
             setRole(e.target.value);
           }}
+          maxLength={40}
         />
-        <span>
-          <FaArrowDown className="cursor-pointer hover:text-fusion-cyan" />
+        <span className="cursor-pointer hover:text-fusion-cyan">
+          {
+            <FaArrowDown
+              className={`transform ${
+                isOpen ? "rotate-180" : "rotate-0"
+              } transition-all duration-300`}
+            />
+          }
         </span>
         {isOpen && (
           <div className="absolute top-[50px] left-0 rounded-md w-full h-fit max-h-[120px] overflow-y-scroll flex flex-col gap-3 bg-gray-900">
