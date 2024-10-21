@@ -8,7 +8,10 @@ interface FormProps {}
 
 export const Form = ({}: FormProps) => {
   return (
-    <div className="bg-gray-100 rounded-md shadow shadow-gray-700 max-w-[500px] w-full mx-4 flex flex-col gap-2 px-2 py-6">
+    <div className="bg-fusion-dark-blue rounded-md shadow shadow-gray-700 max-w-[500px] w-full flex flex-col gap-4 px-4 py-6">
+      <h1 className="font-extrabold text-[2rem] w-[60%] mb-4">
+        Preencha com seus dados
+      </h1>
       <NameInput />
       <EmailInput />
       <PhoneNumberInput />

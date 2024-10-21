@@ -5,7 +5,7 @@ export const RoleSelector = ({}: RoleSelectorProps) => {
     <select
       title="Selecione um cargo"
       name="role-select"
-      className="w-full p-2 border rounded-md outline-none cursor-pointer border-gray-300 text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black"
+      className="w-full p-3 border rounded-md outline-none cursor-pointer border-gray-300 text-gray-900 focus:outline-cyan-500 dark:bg-gray-900 dark:text-gray-200 dark:border-black"
     >
       <option value="frontend-developer">Desenvolvedor Frontend</option>
       <option value="backend-developer">Desenvolvedor Backend</option>
