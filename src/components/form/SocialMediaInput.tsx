@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaGithub, FaLink, FaLinkedin } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
+import { Button } from "../buttons/Button";
 
 interface SocialMediaInputProps {}
 
@@ -34,7 +35,7 @@ export const SocialMediaInput = ({}: SocialMediaInputProps) => {
     <>
       {links.map((link, index) =>
         link === "linkedin" ? (
-          <span className="flex items-center p-2 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-cyan-300 : focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-cyan-300">
+          <span className="flex items-center p-3 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-fusion-cyan focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-fusiontext-fusion-cyan">
             <FaLinkedin className="mr-2" />
             <input
               key={index}
@@ -49,7 +50,7 @@ export const SocialMediaInput = ({}: SocialMediaInputProps) => {
             />
           </span>
         ) : (
-          <span className="flex items-center p-2 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-cyan-300 focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-cyan-300">
+          <span className="flex items-center p-3 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-fusion-cyan focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-fusiontext-fusion-cyan">
             <FaGithub className="mr-2" />
             <input
               key={index}
@@ -66,22 +67,22 @@ export const SocialMediaInput = ({}: SocialMediaInputProps) => {
         )
       )}
       {!links.includes("linkedin") && (
-        <button
+        <Button
           type="button"
+          title="Clique para adicionar o link do seu perfil no LinkedIn"
           onClick={() => handleAddNewLink("linkedin")}
-          className="flex gap-1 items-center rounded-full w-fit px-4 py-2 dark:bg-gray-900 dark:text-cyan-500 transition-all duration-200 active:scale-95 active:dark:bg-cyan-500 active:dark:text-gray-900 outline-cyan-500"
         >
-          Adicionar LinkedIn
-        </button>
+          Adicionar Linkedin
+        </Button>
       )}
       {!links.includes("github") && (
-        <button
+        <Button
           type="button"
+          title="Clique para adicionar o link do seu perfil no GitHub"
           onClick={() => handleAddNewLink("github")}
-          className="flex gap-1 items-center rounded-full w-fit px-4 py-2 dark:bg-gray-900 dark:text-cyan-500 transition-all duration-200 active:scale-95 active:dark:bg-cyan-500 active:dark:text-gray-900 outline-cyan-500"
         >
           Adicionar GitHub
-        </button>
+        </Button>
       )}
     </>
   );
