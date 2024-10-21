@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaGithub, FaLink, FaLinkedin } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import { Button } from "../buttons/Button";
+import { IconButton } from "../buttons/IconButton";
 
 interface SocialMediaInputProps {}
 
@@ -35,10 +36,12 @@ export const SocialMediaInput = ({}: SocialMediaInputProps) => {
     <>
       {links.map((link, index) =>
         link === "linkedin" ? (
-          <span className="flex items-center p-3 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-fusion-cyan focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-fusiontext-fusion-cyan">
+          <span
+            key={index}
+            className="flex items-center p-3 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-fusion-cyan focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-fusiontext-fusion-cyan"
+          >
             <FaLinkedin className="mr-2" />
             <input
-              key={index}
               type="text"
               title="Linkedin"
               placeholder="Linkedin"
@@ -50,10 +53,12 @@ export const SocialMediaInput = ({}: SocialMediaInputProps) => {
             />
           </span>
         ) : (
-          <span className="flex items-center p-3 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-fusion-cyan focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-fusiontext-fusion-cyan">
+          <span
+            key={index}
+            className="flex items-center p-3 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-fusion-cyan focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-fusiontext-fusion-cyan"
+          >
             <FaGithub className="mr-2" />
             <input
-              key={index}
               type="text"
               title="GitHub"
               placeholder="GitHub"
@@ -66,24 +71,24 @@ export const SocialMediaInput = ({}: SocialMediaInputProps) => {
           </span>
         )
       )}
-      {!links.includes("linkedin") && (
-        <Button
-          type="button"
-          title="Clique para adicionar o link do seu perfil no LinkedIn"
-          onClick={() => handleAddNewLink("linkedin")}
-        >
-          Adicionar Linkedin
-        </Button>
-      )}
-      {!links.includes("github") && (
-        <Button
-          type="button"
-          title="Clique para adicionar o link do seu perfil no GitHub"
-          onClick={() => handleAddNewLink("github")}
-        >
-          Adicionar GitHub
-        </Button>
-      )}
+      <div className="flex gap-4">
+        {!links.includes("linkedin") && (
+          <IconButton
+            type="button"
+            title="Clique para adicionar o link do seu perfil no LinkedIn"
+            onClick={() => handleAddNewLink("linkedin")}
+            icon={<FaLinkedin />}
+          />
+        )}
+        {!links.includes("github") && (
+          <IconButton
+            type="button"
+            title="Clique para adicionar o link do seu perfil no GitHub"
+            onClick={() => handleAddNewLink("github")}
+            icon={<FaGithub />}
+          />
+        )}
+      </div>
     </>
   );
 };
