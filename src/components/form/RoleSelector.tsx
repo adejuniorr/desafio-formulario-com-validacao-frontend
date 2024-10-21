@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { FaArrowDown } from "react-icons/fa";
 
-interface RoleSelectorProps {}
-
-export const RoleSelector = ({}: RoleSelectorProps) => {
+export const RoleSelector = () => {
   let roles: string[] = [
     "Desenvolvedor Frontend",
     "Desenvolvedor Backend",
@@ -23,7 +21,6 @@ export const RoleSelector = ({}: RoleSelectorProps) => {
   ];
 
   const [role, setRole] = useState<string>("");
-  // const [currentRolesList, setCurrentRolesList] = useState<string[]>(roles);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleRoleSelector = () => setIsOpen(!isOpen);
@@ -36,24 +33,6 @@ export const RoleSelector = ({}: RoleSelectorProps) => {
     setRole(selectedRole);
     setIsOpen(false);
   };
-
-  /* const handleSearchRoleInput = (e: any) => {
-    const roleSelector = document.querySelector("#role-selector");
-
-    if (roleSelector?.classList.contains("h-0")) {
-      roleSelector?.classList.toggle("h-0");
-      roleSelector?.classList.toggle("overflow-y-scroll");
-    }
-
-    const input = e.target.value;
-
-    const filteredRoles = roles.filter((role) =>
-      role.toLowerCase().includes(input.toLowerCase())
-    );
-
-    setCurrentRolesList(filteredRoles);
-    setRole(input);
-  }; */
 
   return (
     <>
