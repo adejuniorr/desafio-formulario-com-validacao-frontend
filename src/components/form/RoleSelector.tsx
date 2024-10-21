@@ -23,12 +23,24 @@ export const RoleSelector = () => {
   const [role, setRole] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
 
+  /**
+   * Alterna a lista de cargos entre aberta e fechada
+   * @returns void
+   */
   const toggleRoleSelector = () => setIsOpen(!isOpen);
 
+  /**
+   * Array contendo os cargos filtrados pelo texto inserido
+   * no campo de input
+   */
   const filteredRoles = roles.filter((search) =>
     search.toLowerCase().includes(role.toLowerCase())
   );
 
+  /**
+   * Atualiza o cargo selecionado e fecha a lista
+   * @param {string} selectedRole cargo selecionado
+   */
   const handleSelectRole = (selectedRole: string) => {
     setRole(selectedRole);
     setIsOpen(false);
