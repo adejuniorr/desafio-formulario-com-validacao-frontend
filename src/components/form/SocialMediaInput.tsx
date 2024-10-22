@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FaGithub, FaLink, FaLinkedin } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
-import { Button } from "../buttons/Button";
 import { IconButton } from "../buttons/IconButton";
 
 interface SocialMediaInputProps {}
@@ -38,7 +37,7 @@ export const SocialMediaInput = ({}: SocialMediaInputProps) => {
         link === "linkedin" ? (
           <span
             key={index}
-            className="flex items-center p-3 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-fusion-cyan focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-fusiontext-fusion-cyan"
+            className="flex items-center p-3 border rounded-md has-[:focus]:ring-2 has-[:focus]:ring-fusion-cyan has-[:focus]:text-fusion-cyan focus:border-transparent bg-gray-900 text-gray-200 border-black focus:ring-fusion-cyan text-fusion-cyan"
           >
             <FaLinkedin className="mr-2" />
             <input
@@ -55,7 +54,7 @@ export const SocialMediaInput = ({}: SocialMediaInputProps) => {
         ) : (
           <span
             key={index}
-            className="flex items-center p-3 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-fusion-cyan focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-fusiontext-fusion-cyan"
+            className="flex items-center p-3 border rounded-md has-[:focus]:ring-2 has-[:focus]:ring-fusion-cyan has-[:focus]:text-fusion-cyan focus:border-transparent bg-gray-900 text-gray-200 border-black focus:ring-fusion-cyan text-wrap-fusion-cyan"
           >
             <FaGithub className="mr-2" />
             <input
