@@ -39,10 +39,20 @@ export const Form = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-fusion-dark-blue rounded-md shadow shadow-gray-700 max-w-[500px] w-full flex flex-col gap-4 px-4 py-6 mb-10">
-        <h1 className="font-extrabold text-[2rem] mb-4">
-          Preencha com seus dados
-        </h1>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-fusion-dark-blue rounded-md shadow shadow-gray-700 max-w-[500px] w-full flex flex-col gap-4 px-4 py-6 mb-10"
+      >
+        <div className="flex gap-2 items-center">
+          <img
+            src="/fusion-logo.svg"
+            alt="Logotipo do Projeto Frontend Fusion"
+            className="mx-auto max-w-[300px] w-10 min-w-[130px]"
+          />
+          <h1 className="font-extrabold text-[2rem] mb-4">
+            Preencha com seus dados
+          </h1>
+        </div>
         <NameInput />
         <EmailInput />
         <PhoneNumberInput />
