@@ -2,34 +2,47 @@ import { useFormContext } from "react-hook-form";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import { IconButton } from "../buttons/IconButton";
+import { useState } from "react";
 
 export const SocialMediaInput = () => {
   const {
     register,
     setValue,
-    watch,
     formState: { errors },
   } = useFormContext();
-  const links = watch("socialMediaLinks") || [];
+  const [links, setLinks] = useState<string[]>([]);
 
   /**
-   * Adiciona um novo valor ao input de "socialMediaLinks" adicionando um novo link de rede social e ordenando os links.
-   * @param link string contendo o nome da rede social
+   * Atualiza o array de links com um novo valor inserido no input.
+   * @param link string contendo o nome da rede social do novo link
    */
   const handleAddNewLink = (link: string) => {
     const updatedLinks = [...links, link].sort((link) =>
       link === "linkedin" ? -1 : 1
     );
-    setValue("socialMediaLinks", updatedLinks);
+
+    if (link === "linkedin") {
+      setValue("linkedin", undefined);
+    } else {
+      setValue("github", undefined);
+    }
+
+    setLinks(updatedLinks);
   };
 
   /**
-   * Remove um valor do input de "socialMediaLinks" filtrando o array de links.
+   * Remove um link do array de links.
    * @param link string contendo o nome da rede social
    */
   const removeLink = (link: string) => {
     const updatedLinks = links.filter((l: string) => l !== link);
-    setValue("socialMediaLinks", updatedLinks);
+    setLinks(updatedLinks);
+
+    if (link === "linkedin") {
+      setValue("linkedin", undefined);
+    } else {
+      setValue("github", undefined);
+    }
   };
 
   return (
@@ -40,9 +53,7 @@ export const SocialMediaInput = () => {
             <span className="flex items-center p-3 border rounded-md has-[:focus]:ring-2 has-[:focus]:ring-fusion-cyan has-[:focus]:text-fusion-cyan focus:border-transparent bg-gray-900 text-gray-200 border-black focus:ring-fusion-cyan text-fusion-cyan">
               <FaLinkedin className="mr-2" />
               <input
-                {...register(`socialMediaLinksValues.${index}`, {
-                  required: "Insira o link do seu perfil no LinkedIn",
-                })}
+                {...register("linkedin")}
                 type="text"
                 title="Linkedin"
                 placeholder="Linkedin"
@@ -53,22 +64,18 @@ export const SocialMediaInput = () => {
                 onClick={() => removeLink("linkedin")}
               />
             </span>
-            {Array.isArray(errors.socialMediaLinksValues) &&
-              errors.socialMediaLinksValues &&
-              errors.socialMediaLinksValues[index] && (
-                <span className="text-red-500 text-sm">
-                  {errors.socialMediaLinksValues[index].message}
-                </span>
-              )}
+            {errors.linkedin && (
+              <span className="text-red-500 text-sm">
+                {errors.linkedin.message as string}
+              </span>
+            )}
           </div>
         ) : (
           <div key={index}>
             <span className="flex items-center p-3 border rounded-md has-[:focus]:ring-2 has-[:focus]:ring-fusion-cyan has-[:focus]:text-fusion-cyan focus:border-transparent bg-gray-900 text-gray-200 border-black focus:ring-fusion-cyan text-wrap-fusion-cyan">
               <FaGithub className="mr-2" />
               <input
-                {...register(`socialMediaLinksValues.${index}`, {
-                  required: "Insira o link do seu perfil no GitHub",
-                })}
+                {...register("github")}
                 type="text"
                 title="GitHub"
                 placeholder="GitHub"
@@ -79,13 +86,11 @@ export const SocialMediaInput = () => {
                 onClick={() => removeLink("github")}
               />
             </span>
-            {Array.isArray(errors.socialMediaLinksValues) &&
-              errors.socialMediaLinksValues &&
-              errors.socialMediaLinksValues[index] && (
-                <span className="text-red-500 text-sm">
-                  {errors.socialMediaLinksValues[index].message}
-                </span>
-              )}
+            {errors.github && (
+              <span className="text-red-500 text-sm">
+                {errors.github.message as string}
+              </span>
+            )}
           </div>
         )
       )}
