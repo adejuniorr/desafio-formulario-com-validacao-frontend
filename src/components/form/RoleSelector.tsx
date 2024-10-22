@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaArrowDown } from "react-icons/fa";
 
 export const RoleSelector = () => {
@@ -29,6 +29,29 @@ export const RoleSelector = () => {
    */
   const toggleRoleSelector = () => setIsOpen(!isOpen);
 
+  const roleSelectorRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutSide = (e: MouseEvent) => {
+    if (
+      roleSelectorRef.current &&
+      !roleSelectorRef.current.contains(e.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutSide);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutSide);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutSide);
+    };
+  }, [isOpen]);
+
   /**
    * Array contendo os cargos filtrados pelo texto inserido
    * no campo de input
@@ -50,10 +73,10 @@ export const RoleSelector = () => {
     <>
       <div
         onClick={toggleRoleSelector}
-        className="relative flex items-center p-3 border rounded-md border-gray-300 has-[:focus]:ring-2 has-[:focus]:ring-blue-500 has-[:focus]:dark:text-fusion-cyan focus:border-transparent text-gray-900 dark:bg-gray-900 dark:text-gray-200 dark:border-black dark:focus:ring-fusiontext-fusion-cyan"
+        className="relative flex items-center p-3 border rounded-md has-[:focus]:ring-2 has-[:focus]:ring-fusion-cyan has-[:focus]:text-fusion-cyan focus:border-transparent bg-gray-900 text-gray-200 border-black focus:ring-fusiontext-fusion-cyan"
       >
         <input
-        required
+          required
           id="role-input"
           type="text"
           title="Selecione um cargo"
@@ -65,6 +88,7 @@ export const RoleSelector = () => {
 
             setRole(e.target.value);
           }}
+          onBlur={() => setIsOpen(false)}
           maxLength={40}
         />
         <span className="cursor-pointer hover:text-fusion-cyan">
