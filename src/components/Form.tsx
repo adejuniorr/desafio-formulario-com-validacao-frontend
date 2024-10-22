@@ -29,15 +29,33 @@ export const Form = () => {
       email: "",
       phone: "",
       role: "",
-      linkedin: "",
-      github: "",
+      linkedin: undefined,
+      github: undefined,
     },
   });
 
   const { handleSubmit } = methods;
 
   const onSubmit = (data: User) => {
-    console.log(data);
+    if (!localStorage.getItem("users")) {
+      localStorage.setItem("users", JSON.stringify([data]));
+      alert("Dados enviados com sucesso!1");
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")!);
+
+    if (users.find((user: User) => user.email === data.email)) {
+      alert("E-mail já cadastrado");
+      return;
+    }
+
+    localStorage.setItem(
+      "users",
+      JSON.stringify([...JSON.parse(localStorage.getItem("users")!), data])
+    );
+
+    alert("Dados enviados com sucesso!2");
   };
 
   return (
