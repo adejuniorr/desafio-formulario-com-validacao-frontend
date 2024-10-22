@@ -17,8 +17,8 @@ const schema = z.object({
     .email("E-mail inválido"),
   phone: z.string().min(14, "Número de telefone inválido"),
   role: z.string().min(1, "Você deve escolher um cargo de preferência"),
-  socialMediaLinks: z.array(z.string()).optional(),
-  socialMediaLinksValues: z.array(z.string().url("Link inválido")).optional(),
+  linkedin: z.string().url("URL inválida").optional(),
+  github: z.string().url("URL inválida").optional(),
 });
 
 export const Form = () => {
@@ -29,14 +29,14 @@ export const Form = () => {
       email: "",
       phone: "",
       role: "",
-      socialMediaLinks: [],
-      socialMediaLinksValues: [],
+      linkedin: "",
+      github: "",
     },
   });
 
   const { handleSubmit } = methods;
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: User) => {
     console.log(data);
   };
 
