@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { FaArrowDown } from "react-icons/fa";
 
 export const RoleSelector = () => {
@@ -20,25 +21,16 @@ export const RoleSelector = () => {
     "Product Owner",
   ];
 
-  const [role, setRole] = useState<string>("");
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext();
+  const role = watch("role");
+  // const [role, setRole] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
-
-  /**
-   * Alterna a lista de cargos entre aberta e fechada
-   * @returns void
-   */
-  const toggleRoleSelector = () => setIsOpen(!isOpen);
-
   const roleSelectorRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutSide = (e: MouseEvent) => {
-    if (
-      roleSelectorRef.current &&
-      !roleSelectorRef.current.contains(e.target as Node)
-    ) {
-      setIsOpen(false);
-    }
-  };
 
   useEffect(() => {
     if (isOpen) {
@@ -52,12 +44,21 @@ export const RoleSelector = () => {
     };
   }, [isOpen]);
 
+  const handleClickOutSide = (e: MouseEvent) => {
+    if (
+      roleSelectorRef.current &&
+      !roleSelectorRef.current.contains(e.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
   /**
    * Array contendo os cargos filtrados pelo texto inserido
    * no campo de input
    */
   const filteredRoles = roles.filter((search) =>
-    search.toLowerCase().includes(role.toLowerCase())
+    search.toLowerCase().includes(role.toLowerCase() || "")
   );
 
   /**
@@ -65,18 +66,19 @@ export const RoleSelector = () => {
    * @param {string} selectedRole cargo selecionado
    */
   const handleSelectRole = (selectedRole: string) => {
-    setRole(selectedRole);
+    setValue("role", selectedRole);
     setIsOpen(false);
   };
 
   return (
     <>
       <div
-        onClick={toggleRoleSelector}
+        ref={roleSelectorRef}
+        onClick={() => setIsOpen(!isOpen)}
         className="relative flex items-center p-3 border rounded-md has-[:focus]:ring-2 has-[:focus]:ring-fusion-cyan has-[:focus]:text-fusion-cyan focus:border-transparent bg-gray-900 text-gray-200 border-black focus:ring-fusiontext-fusion-cyan"
       >
         <input
-          required
+          {...register("role")}
           id="role-input"
           type="text"
           title="Selecione um cargo"
@@ -86,10 +88,8 @@ export const RoleSelector = () => {
           onChange={(e) => {
             if (!isOpen) setIsOpen(true);
 
-            setRole(e.target.value);
+            setValue("role", e.target.value);
           }}
-          onBlur={() => setIsOpen(false)}
-          maxLength={40}
         />
         <span className="cursor-pointer hover:text-fusion-cyan">
           {
@@ -105,7 +105,7 @@ export const RoleSelector = () => {
             {filteredRoles.map((role, index) => (
               <span
                 key={index}
-                className="cursor-pointer rounded-md p-3 hover:bg-gray-800"
+                className="cursor-pointer rounded-md p-3 hover:bg-gray-800 w-full"
                 onClick={() => handleSelectRole(role)}
               >
                 {role}
@@ -114,6 +114,11 @@ export const RoleSelector = () => {
           </div>
         )}
       </div>
+      {errors.role && (
+        <span className="text-red-500 text-sm">
+          {errors.role?.message as string}
+        </span>
+      )}
     </>
   );
 };
