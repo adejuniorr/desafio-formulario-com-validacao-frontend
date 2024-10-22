@@ -16,3 +16,24 @@
         margin: 0;
     }
 }
+
+.Toastify__toast {
+    @apply bg-gray-700 !important;
+    @apply text-white !important;
+}
+
+.Toastify__toast>button>svg {
+    color: var(--fusion-cyan) !important;
+}
+
+.Toastify__progress-bar {
+    background: var(--fusion-cyan) !important;
+}
+
+.Toastify__toast--warning>button>svg {
+    @apply text-yellow-500 !important;
+}
+
+.Toastify__progress-bar--warning {
+    @apply bg-yellow-500 !important;
+}

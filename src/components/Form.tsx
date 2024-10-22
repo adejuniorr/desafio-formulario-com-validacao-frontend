@@ -8,6 +8,7 @@ import { SocialMediaInput } from "./form/SocialMediaInput";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { toast } from "react-toastify";
 
 const schema = z.object({
   name: z.string().min(1, "Você deve informar o seu nome completo"),
@@ -39,14 +40,18 @@ export const Form = () => {
   const onSubmit = (data: User) => {
     if (!localStorage.getItem("users")) {
       localStorage.setItem("users", JSON.stringify([data]));
-      alert("Dados enviados com sucesso!1");
+      toast("Dados enviados com sucesso!", {
+        type: "success",
+      });
       return;
     }
 
     const users = JSON.parse(localStorage.getItem("users")!);
 
     if (users.find((user: User) => user.email === data.email)) {
-      alert("E-mail já cadastrado");
+      toast("E-mail já cadastrado", {
+        type: "warning",
+      });
       return;
     }
 
@@ -55,22 +60,24 @@ export const Form = () => {
       JSON.stringify([...JSON.parse(localStorage.getItem("users")!), data])
     );
 
-    alert("Dados enviados com sucesso!2");
+    toast("Dados enviados com sucesso!", {
+      type: "success",
+    });
   };
 
   return (
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-fusion-dark-blue rounded-md shadow shadow-gray-700 max-w-[500px] w-full flex flex-col gap-4 px-4 py-6 mb-10"
+        className="bg-fusion-dark-blue rounded-md shadow shadow-gray-700 max-w-[500px] w-full flex flex-col gap-4 px-4 sm:px-8 py-6 mb-4"
       >
-        <div className="flex gap-2 items-center mb-6">
+        <div className="flex sm:flex-row-reverse gap-2 items-center justify-center mb-6">
           <img
             src="/fusion-logo.svg"
             alt="Logotipo do Projeto Frontend Fusion"
-            className="mx-auto max-w-[300px] w-10 min-w-[130px]"
+            className="mx-auto max-w-[250px] w-10 min-w-[100px]"
           />
-          <h1 className="font-extrabold text-[2rem]">
+          <h1 className="font-extrabold text-[1.6rem] w-full">
             Preencha com seus dados
           </h1>
         </div>
