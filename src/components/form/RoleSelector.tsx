@@ -28,7 +28,6 @@ export const RoleSelector = () => {
     formState: { errors },
   } = useFormContext();
   const role = watch("role");
-  // const [role, setRole] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
   const roleSelectorRef = useRef<HTMLDivElement>(null);
 
@@ -82,7 +81,7 @@ export const RoleSelector = () => {
           id="role-input"
           type="text"
           title="Selecione um cargo"
-          placeholder="Cargo"
+          placeholder="Cargo*"
           className="w-full bg-transparent focus:outline-none"
           value={role}
           onChange={(e) => {

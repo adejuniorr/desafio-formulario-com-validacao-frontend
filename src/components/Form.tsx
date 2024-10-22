@@ -11,7 +11,10 @@ import * as z from "zod";
 
 const schema = z.object({
   name: z.string().min(1, "Você deve informar o seu nome completo"),
-  email: z.string().email("E-mail inválido"),
+  email: z
+    .string()
+    .min(1, "O campo de e-mail é obrigatório")
+    .email("E-mail inválido"),
   phone: z.string().min(14, "Número de telefone inválido"),
   role: z.string().min(1, "Você deve escolher um cargo de preferência"),
   socialMediaLinks: z.array(z.string()).optional(),
@@ -43,13 +46,13 @@ export const Form = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="bg-fusion-dark-blue rounded-md shadow shadow-gray-700 max-w-[500px] w-full flex flex-col gap-4 px-4 py-6 mb-10"
       >
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center mb-6">
           <img
             src="/fusion-logo.svg"
             alt="Logotipo do Projeto Frontend Fusion"
             className="mx-auto max-w-[300px] w-10 min-w-[130px]"
           />
-          <h1 className="font-extrabold text-[2rem] mb-4">
+          <h1 className="font-extrabold text-[2rem]">
             Preencha com seus dados
           </h1>
         </div>
@@ -57,7 +60,7 @@ export const Form = () => {
         <EmailInput />
         <PhoneNumberInput />
         <RoleSelector />
-        <hr />
+        <hr className="my-6" />
         <p>Gostaria de adicionar alguma rede?</p>
         <SocialMediaInput />
         <span className="flex justify-end">

@@ -1,33 +1,22 @@
-import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import { IconButton } from "../buttons/IconButton";
 
 export const SocialMediaInput = () => {
-  // const [links, setLinks] = useState<string[]>([]);
   const {
     register,
     setValue,
-    getValues,
     watch,
     formState: { errors },
   } = useFormContext();
   const links = watch("socialMediaLinks") || [];
 
   /**
-   * Adiciona uma instância de input para receber o link de uma rede social.
-   *
-   * Ordena o array de "inputs" mantenho o LinkedIn sempre no topo.
+   * Adiciona um novo valor ao input de "socialMediaLinks" adicionando um novo link de rede social e ordenando os links.
    * @param link string contendo o nome da rede social
    */
   const handleAddNewLink = (link: string) => {
-    /* setLinks(
-      [...links, link].sort((link) => {
-        if (link === "linkedin") return -1;
-        return 1;
-      })
-    ); */
     const updatedLinks = [...links, link].sort((link) =>
       link === "linkedin" ? -1 : 1
     );
@@ -35,11 +24,10 @@ export const SocialMediaInput = () => {
   };
 
   /**
-   * Remove um "input" de link de uma rede social.
+   * Remove um valor do input de "socialMediaLinks" filtrando o array de links.
    * @param link string contendo o nome da rede social
    */
   const removeLink = (link: string) => {
-    // setLinks(links.filter((l) => l !== link));
     const updatedLinks = links.filter((l: string) => l !== link);
     setValue("socialMediaLinks", updatedLinks);
   };
