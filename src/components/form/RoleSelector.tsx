@@ -1,26 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { FaArrowDown } from "react-icons/fa";
+import { roles } from "../roles/roles";
 
 export const RoleSelector = () => {
-  let roles: string[] = [
-    "Desenvolvedor Frontend",
-    "Desenvolvedor Backend",
-    "Desenvolvedor Full Stack",
-    "Desenvolvedor Mobile",
-    "Desenvolvedor de Software",
-    "Engenheiro de Software",
-    "Arquiteto de Software",
-    "UI/UX Designer",
-    "Analista de Sistemas",
-    "Analista Programador",
-    "DevOps Engineer",
-    "Engenheiro de Dados",
-    "QA Engineer",
-    "Scrum Master",
-    "Product Owner",
-  ];
-
   const {
     register,
     setValue,
@@ -101,7 +84,7 @@ export const RoleSelector = () => {
         </span>
         {isOpen && (
           <div className="absolute top-[50px] left-0 rounded-md w-full h-fit max-h-[120px] overflow-y-scroll flex flex-col gap-3 bg-gray-900">
-            {filteredRoles.map((role, index) => (
+            {filteredRoles.map((role: string, index: number) => (
               <span
                 key={index}
                 className="cursor-pointer rounded-md p-3 hover:bg-gray-800 w-full"
